@@ -53,7 +53,6 @@ fun main() {
         }while (readContinue == null || readContinue >= 2)
 
         isContinue = readContinue == 1
-
         println()
     }
 
