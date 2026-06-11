@@ -40,11 +40,10 @@ enum class Hands(name: String) {
         }
 
         fun getHandFromInt(handInt: Int): Hands {
-            return when (handInt) {
-                0 -> ROCK
-                1 -> PAPER
-                2 -> SCISSORS
-                else -> ROCK //念のために設置
+            if (handInt <= Hands.entries.size) {
+                return entries[handInt]
+            }else {
+                return Hands.entries[0]
             }
         }
 
