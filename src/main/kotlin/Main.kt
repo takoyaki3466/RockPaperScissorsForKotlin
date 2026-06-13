@@ -6,25 +6,29 @@ fun main() {
     var drawCount = 0
 
     while (isContinue) {
-        val handsStr = Hands.listString()
-        println("please write your hand [$handsStr]")
+        val handStr = Hand.listString()
+        println("please write your hand [$handStr]")
 
         var yourHandInt: Int?
         do {
             print("what your hand? : ")
             yourHandInt = readln().toIntOrNull()
-            if (yourHandInt == null || yourHandInt >= 3) {
+            val isNumCriteria = yourHandInt == null || yourHandInt >= Hands.handList.size || yourHandInt < 0
+
+            if (isNumCriteria) {
                 println("Enter a number within the specified range!!!!")
             }
-        }while (yourHandInt == null || yourHandInt >= 3)
-        val yourHand = Hands.getHandFromInt(yourHandInt)
 
-        println("Your hand is $yourHand")
-        val random = (0..(Hands.entries.size - 1)).random()
+        }while (isNumCriteria)
 
-        val enemyHand = Hands.getHandFromInt(random)
+        val yourHand = Hand.getHandFromInt(yourHandInt)
 
-        println("Enemy hand is ${enemyHand.getName()}")
+        println("Your hand is ${yourHand.name}")
+        val random = (0..(Hands.handList.size - 1)).random()
+
+        val enemyHand = Hand.getHandFromInt(random)
+
+        println("Enemy hand is ${enemyHand.name}")
 
         val winOrLose = yourHand.isWinOrLose(enemyHand)
         when (winOrLose) {
